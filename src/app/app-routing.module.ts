@@ -8,8 +8,13 @@ import { DetailRoutingModule } from './detail/detail-routing.module';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'scripts',
     pathMatch: 'full'
+  },
+  {
+    path: "scripts",
+    loadChildren: () => import("./routes/scripts/modules/scripts.module")
+      .then(x => x.ScriptsModule)
   },
   {
     path: '**',
@@ -19,9 +24,10 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
+    // RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
+    RouterModule.forRoot(routes),
     HomeRoutingModule,
-    DetailRoutingModule
+    DetailRoutingModule,
   ],
   exports: [RouterModule]
 })

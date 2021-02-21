@@ -11,12 +11,17 @@ function createWindow(): BrowserWindow {
   const electronScreen = screen;
   const size = electronScreen.getPrimaryDisplay().workAreaSize;
 
+  const initialHeight = size.height / 2;
+  const initialWidth = size.width / 2;
+
+  const smallestDimension = initialHeight > initialWidth ? initialWidth : initialHeight; 
+
   // Create the browser window.
   win = new BrowserWindow({
     x: 0,
     y: 0,
-    width: size.width/2,
-    height: size.height/2,
+    width: smallestDimension,
+    height: smallestDimension,
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: (serve) ? true : false,
